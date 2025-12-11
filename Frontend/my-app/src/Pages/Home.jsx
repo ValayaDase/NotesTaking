@@ -22,7 +22,7 @@ function Home() {
   const fetchNotes = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/notes/fetchnotes/${userId}`
+        `https://notestaking-1.onrender.com/api/notes/fetchnotes/${userId}`
       );
       setNotes(response.data);
     } catch (error) {
@@ -40,14 +40,14 @@ function Home() {
 const handleSaveNote = async (note) => {
   try {
     if(editNote){
-      await axios.put(`http://localhost:5000/api/notes/updatenote/${userId}/${editNote._id}`,
+      await axios.put(`https://notestaking-1.onrender.com/api/notes/updatenote/${userId}/${editNote._id}`,
         note
       );
       toast.success("notes updated successfuly");
       setEditNote(null);
     }
     else{
-      await axios.post("http://localhost:5000/api/notes/addnote", {
+      await axios.post("https://notestaking-1.onrender.com/api/notes/addnote", {
       ...note,
       userId: userId,   //  must match backend schema
     });
@@ -70,7 +70,7 @@ const handleSaveNote = async (note) => {
 
 const handleDelete=async(noteId)=>{
   try{
-    const response = await axios.delete(`http://localhost:5000/api/notes/deletenote/${userId}/${noteId}`);
+    const response = await axios.delete(`https://notestaking-1.onrender.com/api/notes/deletenote/${userId}/${noteId}`);
     toast.success(response.data);
     fetchNotes(); // referesh all notes again
   }
